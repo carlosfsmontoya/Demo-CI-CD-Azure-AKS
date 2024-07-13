@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="404">
+  <section class="bg-white dark:bg-gray-900">
+    <div class="container flex items-center min-h-screen px-6 py-12 mx-auto">
+      <div class="flex flex-col items-center max-w-sm mx-auto text-center">
+        <h1
+          class="mt-10 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl"
+        >
+          Página no encontrada
+        </h1>
+        <p class="mt-4 text-gray-500 dark:text-gray-400">
+          Al parecer saliste de nuestra orbita, <a href="/"
+            >haz click aquí para regresar al inicio.</a
+          >
+        </p>
+
+        <p
+          class="p-3 text-sm font-medium text-blue-500 rounded-full bg-blue-50 dark:bg-gray-800"
+        >
+          <img src="/404.gif" alt="" />
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
