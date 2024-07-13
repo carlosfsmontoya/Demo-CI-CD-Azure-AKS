@@ -22,10 +22,7 @@ jobs:
         docker build -t commette:$TAG .
         docker tag commette:$TAG demoacrtest.azurecr.io/commette:$TAG
         docker push demoacrtest.azurecr.io/commette:$TAG
-    - name: Update Deployment
-      run: |
-        kubectl set image deployment/commette-deployment commette=demoacrtest.azurecr.io/commette:$TAG
-        
+   
   deploy-to-aks:
     needs: build-and-push
     runs-on: ubuntu-latest
@@ -46,7 +43,10 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         resource-group: demo-terraform-kubernetes-RG
         cluster-name: demok8s
-
+    - name: Update Deployment
+      run: |
+        kubectl set image deployment/commette-deployment commette=demoacrtest.azurecr.io/commette:$TAG
+     
     - name: Deploy to AKS
       run: |
         kubectl apply -f deployment.yaml
