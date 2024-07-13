@@ -47,3 +47,14 @@ jobs:
     - name: Deploy to AKS
       run: |
         kubectl apply -f deployment.yaml
+        
+    - name: Get public IP of the service
+      run: |
+        IP=""
+        while [ -z "$IP" ]; do
+          echo "Waiting for IP..."
+          IP=$(kubectl get svc commette-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          [ -z "$IP" ] && sleep 10
+        done
+        echo "Service IP: $IP"
+        echo "The public IP of the service is $IP"
