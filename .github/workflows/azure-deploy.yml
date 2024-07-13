@@ -47,7 +47,7 @@ jobs:
     - name: Update image in deployment
       run: |
         kubectl set image deployment/commette-deployment commette=demoacrtest.azurecr.io/commette:$TAG --record
-        
+    
     - name: Deploy to AKS
       run: |
         kubectl apply -f deployment.yaml
