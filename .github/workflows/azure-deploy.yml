@@ -51,6 +51,10 @@ jobs:
       run: |
         kubectl set image deployment/commette-deployment commette=demoacrtest.azurecr.io/commette:${{ env.IMAGE_TAG }}
         
+    - name: Restart Pods in Deployment
+      run: |
+        kubectl rollout restart deployment/commette-deployment
+
     - name: Get public IP of the service
       run: |
         IP=""
