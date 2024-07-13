@@ -10,19 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - name: Log in to Azure Container Registry
       uses: azure/docker-login@v1
       with:
         login-server: demoacrtest.azurecr.io
         username: ${{ secrets.ACR_USERNAME }}
         password: ${{ secrets.ACR_PASSWORD }}
+
     - name: Build and push Docker image
       run: |
-        TAG=$(echo $GITHUB_SHA | cut -c1-7)
-        docker build -t commette:$TAG .
-        docker tag commette:$TAG demoacrtest.azurecr.io/commette:$TAG
-        docker push demoacrtest.azurecr.io/commette:$TAG
-        
+        IMAGE_TAG=$(echo $GITHUB_SHA | cut -c1-7)
+        docker build -t commette:$IMAGE_TAG .
+        docker tag commette:$IMAGE_TAG demoacrtest.azurecr.io/commette:$IMAGE_TAG
+        docker push demoacrtest.azurecr.io/commette:$IMAGE_TAG
+        echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+
   deploy-to-aks:
     needs: build-and-push
     runs-on: ubuntu-latest
@@ -43,14 +46,10 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         resource-group: demo-terraform-kubernetes-RG
         cluster-name: demok8s
-      
-    - name: Update image in deployment
-      run: |
-        kubectl set image deployment/commette-deployment commette=demoacrtest.azurecr.io/commette:$TAG --record
-    
+
     - name: Deploy to AKS
       run: |
-        kubectl apply -f deployment.yaml
+        kubectl set image deployment/commette-deployment commette=demoacrtest.azurecr.io/commette:${{ env.IMAGE_TAG }}
         
     - name: Get public IP of the service
       run: |

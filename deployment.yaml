@@ -7,11 +7,6 @@ spec:
   selector:
     matchLabels:
       app: commette
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
   template:
     metadata:
       labels:
@@ -22,6 +17,11 @@ spec:
         image: demoacrtest.azurecr.io/commette:latest
         ports:
         - containerPort: 8080
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
 
 ---
 apiVersion: v1
