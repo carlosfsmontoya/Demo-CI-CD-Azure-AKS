@@ -20,8 +20,9 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build . -t demoacrtest.azurecr.io/commette:${{ github.sha }}
-        docker push demoacrtest.azurecr.io/commette:${{ github.sha }}
+        docker build -t commette:latest .
+        docker tag commette:latest demoacrtest.azurecr.io/commette:latest
+        docker push demoacrtest.azurecr.io/commette:latest
 
   deploy-to-aks:
     needs: build-and-push
