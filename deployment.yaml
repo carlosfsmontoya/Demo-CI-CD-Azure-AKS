@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: commette
-        image: demoacrtest.azurecr.io/commette:latest
+        image: demoacrtest.azurecr.io/commette:${{ github.sha }}
         ports:
         - containerPort: 8080
 
