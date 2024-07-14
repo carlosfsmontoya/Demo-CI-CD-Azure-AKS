@@ -62,4 +62,4 @@ jobs:
           [ -z "$IP" ] && sleep 10
         done
         echo "Service IP: $IP"
-        echo "The public IP of the service is $IP" | tee -a $GITHUB_ENV
+        echo "SERVICE_IP=$IP" >> $GITHUB_ENV
