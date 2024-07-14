@@ -1,6 +1,8 @@
 # Pipeline de CI/CD hacia Azure Kubernetes Service (AKS) con GitHub Actions
 
-Este documento explica el proceso de Integración Continua y Despliegue Continuo (CI/CD) definido en el flujo de trabajo de GitHub Actions para desplegar una aplicación web en Azure Kubernetes Service (AKS). La aplicación se construye utilizando Astro (la aplicación de esta prueba es solo un demo, no es un website completo), un moderno framework de front-end, y se empaqueta en un contenedor Docker. A continuación, encontrarás pasos detallados sobre cómo replicar este proceso, incluyendo la configuración de los requisitos previos necesarios, la comprensión del archivo de flujo de trabajo y la obtención de los secretos requeridos.
+Este documento explica el proceso de Integración Continua y Despliegue Continuo (CI/CD) definido en el flujo de trabajo de GitHub Actions para desplegar una aplicación web en Azure Kubernetes Service (AKS). La aplicación se construye utilizando Astro, un moderno framework de front-end  (la aplicación de esta prueba es solo un demo con fines demostrativos, no es un website completo), y se empaqueta en un contenedor Docker. 
+
+A continuación, encontrarás pasos detallados sobre cómo replicar este proceso, incluyendo la configuración de los requisitos previos necesarios, la comprensión del archivo de flujo de trabajo y la obtención de los secretos requeridos.
 
 ## Requisitos Previos
 
