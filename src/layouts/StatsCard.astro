@@ -1,0 +1,15 @@
+---
+interface Props {
+  imgSrc: string;
+  imgAlt: string;
+  text: string;
+}
+const { imgSrc, imgAlt, text } = Astro.props as Props;
+---
+
+<div class="flex items-center">
+  <img class="h-20" src={imgSrc} alt={imgAlt} />
+  <p class="text-sm text-white">
+    {text}
+  </p>
+</div>
