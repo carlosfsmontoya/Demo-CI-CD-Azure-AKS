@@ -1,6 +1,6 @@
 # Pipeline de CI/CD hacia Azure Kubernetes Service (AKS) con GitHub Actions
 
-Este documento explica el proceso de Integración Continua y Despliegue Continuo (CI/CD) definido en el flujo de trabajo de GitHub Actions para desplegar una aplicación web en Azure Kubernetes Service (AKS). La aplicación se construye utilizando Astro, un moderno framework de front-end, y se empaqueta en un contenedor Docker. A continuación, encontrarás pasos detallados sobre cómo replicar este proceso, incluyendo la configuración de los requisitos previos necesarios, la comprensión del archivo de flujo de trabajo y la obtención de los secretos requeridos.
+Este documento explica el proceso de Integración Continua y Despliegue Continuo (CI/CD) definido en el flujo de trabajo de GitHub Actions para desplegar una aplicación web en Azure Kubernetes Service (AKS). La aplicación se construye utilizando Astro (la aplicación de esta prueba es solo un demo, no es un website completo), un moderno framework de front-end, y se empaqueta en un contenedor Docker. A continuación, encontrarás pasos detallados sobre cómo replicar este proceso, incluyendo la configuración de los requisitos previos necesarios, la comprensión del archivo de flujo de trabajo y la obtención de los secretos requeridos.
 
 ## Requisitos Previos
 
@@ -14,21 +14,24 @@ El archivo `.github/workflows/ci-cd-azure.yml` define el pipeline de CI/CD con d
 
 ### Integración Continua
 
-1. **Checkout del Código**: Clona el repositorio en el ejecutor de GitHub Actions.
-2. **Inicio de Sesión en Azure Container Registry (ACR)**: Utiliza la acción `azure/docker-login` para autenticarse en ACR usando secretos.
-3. **Construir y Empujar la Imagen Docker**: Construye una imagen Docker a partir del Dockerfile, la etiqueta y la empuja a ACR.
+1. **actions/checkout@v4**: Clona el repositorio en el ejecutor de GitHub Actions.
+2. **Log in to Azure Container Registry**: Utiliza la acción `azure/docker-login` para autenticarse en ACR usando secretos.
+3. **Build and push Docker image**: Construye una imagen Docker a partir del Dockerfile, la etiqueta y la empuja a ACR.
 
 ### Despliegue Continuo
 
-1. **Checkout del Código**: Clona el repositorio en el ejecutor de GitHub Actions.
-2. **Inicio de Sesión en Azure**: Inicia sesión en Azure utilizando la acción `azure/login` con credenciales almacenadas como secretos.
-3. **Configuración de Kubectl**: Instala kubectl utilizando la acción `azure/setup-kubectl`.
-4. **Conexión a AKS**: Utiliza la acción `azure/aks-set-context` para establecer el contexto al clúster de AKS especificado.
-5. **Despliegue en AKS**: Aplica la configuración de despliegue de Kubernetes usando `kubectl apply`.
-6. **Reinicio del Clúster de Kubernetes**: Reinicia el despliegue para asegurar que se use la última imagen.
-7. **Obtener la IP Pública del Servicio**: Recupera la dirección IP pública del servicio desplegado y la muestra para su verificación.
+1. **actions/checkout@v4**: Clona el repositorio en el ejecutor de GitHub Actions.
+2. **Azure Login**: Inicia sesión en Azure utilizando la acción `azure/login` con credenciales almacenadas como secretos.
+3. **Set up Kubectl**: Instala kubectl utilizando la acción `azure/setup-kubectl`.
+4. **Connect to AKS**: Utiliza la acción `azure/aks-set-context` para establecer el contexto al clúster de AKS especificado.
+5. **Deploy to AKS**: Aplica la configuración de despliegue de Kubernetes usando `kubectl apply`.
+6. **Restart Kubernetes Cluster**: Reinicia el despliegue para asegurar que se use la última imagen.
+7. **Obtener la dirección IP pública del servicio**: Recupera la dirección IP pública del servicio desplegado y la muestra para su verificación.
+**Nota importante: Este paso es solo con fines demostrativos y no se recomienda exponer la dirección IP pública del servicio en un entorno de producción.**
 
 ## Configuración de Secretos
+
+**Nota importante: No compartas estos secretos con nadie. Mantén la confidencialidad de la información y evita divulgarla a terceros sin tu autorización.**
 
 El flujo de trabajo requiere varios secretos que deben configurarse en tu repositorio de GitHub:
 
@@ -54,7 +57,7 @@ Para obtener y configurar los secretos necesarios (`ACR_USERNAME`, `ACR_PASSWORD
    ```
 2. **Obtener credenciales de ACR**:
    ```bash
-   az acr credential show --name <NombreDeTuACR>
+   az acr credential show --name "<NombreDeTuACR>"
    ```
    Reemplaza `<NombreDeTuACR>` con el nombre de tu Azure Container Registry. Este comando te proporcionará el `username` (ACR_USERNAME) y `passwords` (ACR_PASSWORD).
 
