@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  continuous-integration:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -24,7 +24,7 @@ jobs:
         docker tag commette:latest demoacrtest.azurecr.io/commette:latest
         docker push demoacrtest.azurecr.io/commette:latest
 
-  deploy-to-aks:
+  continuous-deployment:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
