@@ -10,7 +10,7 @@ Este documento explica el proceso de Integración Continua y Despliegue Continuo
 
 ## Visión General del Flujo de Trabajo
 
-El archivo `.github/workflows/ci-cd.yml` define el pipeline de CI/CD con dos trabajos principales: `continuous-integration` y `continuous-deployment`.
+El archivo `.github/workflows/ci-cd-azure.yml` define el pipeline de CI/CD con dos trabajos principales: `continuous-integration` y `continuous-deployment`.
 
 ### Integración Continua
 
@@ -43,9 +43,7 @@ Para obtener y configurar los secretos necesarios (`ACR_USERNAME`, `ACR_PASSWORD
 ### Obtener `ACR_USERNAME` y `ACR_PASSWORD`
 
 1. **Iniciar sesión en Azure CLI**:
-   ```bash
-   az login
-```markdown
+   ```bash az login```
 Para obtener y configurar los secretos necesarios (`ACR_USERNAME`, `ACR_PASSWORD`, `AZURE_CREDENTIALS`, `AZURE_SUBSCRIPTION_ID`) en GitHub, sigue estos pasos:
 
 ### Obtener `ACR_USERNAME` y `ACR_PASSWORD`
@@ -84,7 +82,6 @@ Una vez obtenidos los valores:
 2. Ve a "Settings" > "Secrets" > "Actions".
 3. Haz clic en "New repository secret".
 4. Añade cada uno de los valores obtenidos (`ACR_USERNAME`, `ACR_PASSWORD`, `AZURE_CREDENTIALS`, `AZURE_SUBSCRIPTION_ID`) como un secreto separado, proporcionando un nombre (clave) y su valor correspondiente.
-```
 
 ## Ejecutando el Flujo de Trabajo
 
