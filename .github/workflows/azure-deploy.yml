@@ -9,7 +9,7 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Log in to Azure Container Registry
       uses: azure/docker-login@v2
@@ -28,7 +28,7 @@ jobs:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Azure Login
       uses: azure/login@v2
@@ -36,10 +36,10 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Set up Kubectl
-      uses: azure/setup-kubectl@v3
+      uses: azure/setup-kubectl@v4
 
     - name: Connect to AKS
-      uses: azure/aks-set-context@v3
+      uses: azure/aks-set-context@v4
       with:
         resource-group: demo-terraform-kubernetes-RG
         cluster-name: demok8s
@@ -63,4 +63,3 @@ jobs:
         done
         echo "Service IP: $IP"
         echo "SERVICE_IP=$IP" >> $GITHUB_ENV
-
