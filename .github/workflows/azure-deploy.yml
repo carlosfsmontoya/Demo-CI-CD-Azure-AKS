@@ -39,11 +39,11 @@ jobs:
       uses: azure/setup-kubectl@v3
 
     - name: Connect to AKS
-      uses: azure/aks-set-context@v2
+      uses: azure/aks-set-context@v3
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
         resource-group: demo-terraform-kubernetes-RG
         cluster-name: demok8s
+        subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: Deploy to AKS
       run: |
