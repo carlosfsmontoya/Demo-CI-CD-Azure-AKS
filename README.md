@@ -38,17 +38,11 @@ El archivo `.github/workflows/ci-cd-azure.yml` define el pipeline de CI/CD con d
 El flujo de trabajo requiere varios secretos que deben configurarse en tu repositorio de GitHub:
 
 - `ACR_USERNAME` y `ACR_PASSWORD`: Credenciales para iniciar sesión en Azure Container Registry.
-- `AZURE_CREDENTIALS`: Un objeto JSON que contiene tu principal de servicio de Azure para iniciar sesión en Azure.
+- `AZURE_CREDENTIALS`: Un objeto JSON que contiene tu Principal Service de Azure para iniciar sesión en Azure.
 - `AZURE_SUBSCRIPTION_ID`: Tu ID de suscripción de Azure.
 
 Puedes crear estos secretos navegando a Configuración > Secretos en tu repositorio y haciendo clic en "Nuevo secreto de repositorio".
 
-Para obtener y configurar los secretos necesarios (`ACR_USERNAME`, `ACR_PASSWORD`, `AZURE_CREDENTIALS`, `AZURE_SUBSCRIPTION_ID`) en GitHub, sigue estos pasos:
-
-### Obtener `ACR_USERNAME` y `ACR_PASSWORD`
-
-1. **Iniciar sesión en Azure CLI**:
-   ```bash az login```
 Para obtener y configurar los secretos necesarios (`ACR_USERNAME`, `ACR_PASSWORD`, `AZURE_CREDENTIALS`, `AZURE_SUBSCRIPTION_ID`) en GitHub, sigue estos pasos:
 
 ### Obtener `ACR_USERNAME` y `ACR_PASSWORD`
@@ -65,9 +59,9 @@ Para obtener y configurar los secretos necesarios (`ACR_USERNAME`, `ACR_PASSWORD
 
 ### Obtener `AZURE_CREDENTIALS`
 
-1. **Crear un principal de servicio**:
+1. **Crear un Principal Service**:
    ```bash
-   az ad sp create-for-rbac --name "<tuApp>" --sdk-auth
+   az ad sp create-for-rbac --name "<tuApp>" 
    ```
    Este comando generará un objeto JSON. Copia este objeto completo; será tu valor de `AZURE_CREDENTIALS`.
 
